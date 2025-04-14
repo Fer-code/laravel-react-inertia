@@ -37,6 +37,7 @@ class ProjectController extends Controller
         return inertia("Project/Index", [
             "projects" => ProjectResource::collection($projects),
             "queryParams" => request()->query() ?: null,
+            'success' => session('success'),
         ]);
     }
 
@@ -117,7 +118,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $name = $project->name;
-        
+
         $project->delete();
 
         if ($project->image_path) {
